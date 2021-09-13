@@ -97,6 +97,11 @@ To start the farmr.net bot in harvester mode (Logs stored in /farmr/log.txt)
 -e farmr="harvester"
 ```
 
+To start the Chiadog agent (Config file in /data/chiadog/config.yaml)
+```
+-e chiadog="true"
+```
+
 To start the plotman tool in daemon mode (Logs stored in /data/plotman/daemon.log)
 ```
 -e plotman="true"
