@@ -41,6 +41,13 @@ if [ ! -d /root/.config ] ; then
 fi
 ln -fs /data/plotman /root/.config/plotman
 
+# Setup Chiadog
+if [ ! -d "/data/chiadog" ] ; then
+	mkdir -p /data/chiadog
+fi
+if [ ! -e "/data/chiadog/config.yaml" ] ; then
+	cp /chiadog/config-example.yaml /data/chiadog/config.yaml
+fi
 
 cd /chia-blockchain
 
@@ -104,6 +111,10 @@ if [[ $farmr == 'farmer' ]]; then
 fi
 if [[ $farmr == 'harvester' ]]; then
 	(cd /farmr/ && sleep 60 && ./farmr harvester headless) &
+fi
+
+if [[ $chiadog == 'true' ]] ; then
+	(cd /chiadog/ && sleep 60 && . ./venv/bin/activate && python3 main.py --config /data/chiadog/config.yaml) &
 fi
 
 if [[ $plotman == 'true' ]]; then

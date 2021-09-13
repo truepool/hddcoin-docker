@@ -36,8 +36,9 @@ ENV farmer_port="null"
 ENV testnet="false"
 ENV full_node_port="null"
 ENV TZ="UTC"
-ENV CHIA_BRANCH="1.2.5"
+ENV CHIA_BRANCH="1.2.6"
 ENV CHIA_CHECKOUT="5fc67c72c76f24a46285b127c6a4f9b4ea2b533a"
+ENV CHIADOG_VERSION="v0.7.0"
 ENV FARMR_VERSION="v1.7.6.10"
 ENV PLOTMAN_VERSION="v0.5.1"
 ENV PLOTNG_VERSION="v0.26"
@@ -73,6 +74,14 @@ RUN wget https://github.com/maded2/plotng/releases/download/${PLOTNG_VERSION}/pl
 # Plotman
 RUN pip install --force-reinstall git+https://github.com/ericaltendorf/plotman@${PLOTMAN_VERSION}
 
+# Chiadog
+RUN wget https://github.com/martomi/chiadog/archive/refs/tags/${CHIADOG_VERSION}.tar.gz \
+&& tar xf ${CHIADOG_VERSION}.tar.gz \
+&& rm ${CHIADOG_VERSION}.tar.gz \
+&& mv chiadog-*/ /chiadog \
+&& cd /chiadog && ./install.sh
+
+# Setup Chia
 ENV PATH=/chia-blockchain/venv/bin/:$PATH
 WORKDIR /chia-blockchain
 ADD ./entrypoint.sh entrypoint.sh
