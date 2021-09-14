@@ -19,7 +19,7 @@ Current Versions:
 * MadMax: [master / a9a49031ac03504b272b7199ef3e071c2d93e9cc](https://github.com/madMAx43v3r/chia-plotter/)
 * BladeBit: [master / 240a9b547736ea8d32b1998ba468f70c03ff2f3a](https://github.com/harold-b/bladebit/)
 * PlotNG: [v0.62](https://github.com/maded2/plotng)
-* ChiaDog: [v0.7.0](https://github.com/martomi/chiado/)
+* ChiaDog: [v0.7.0](https://github.com/martomi/chiadog/)
 
 ## Basic Startup
 ```
