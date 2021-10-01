@@ -18,6 +18,7 @@ RUN git clone --branch ${MM_BRANCH} https://github.com/madMAx43v3r/chia-plotter.
 RUN echo "cloning BladeBit ${BB_BRANCH}"
 RUN git clone --branch ${BB_BRANCH} --recursive https://github.com/harold-b/bladebit.git \
 && cd bladebit \
+&& git checkout ${BB_CHECKOUT} \
 && ./build-bls \
 && make clean && make -j$(nproc --all)
 
