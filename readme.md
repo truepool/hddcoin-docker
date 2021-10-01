@@ -17,7 +17,7 @@ Current Versions:
 * Plotman: [v0.5.1](https://github.com/ericaltendorf/plotman/)
 * Farmr: [1.7.6.10](https://github.com/joaquimguimaraes/farmr/)
 * MadMax: [master / a9a49031ac03504b272b7199ef3e071c2d93e9cc](https://github.com/madMAx43v3r/chia-plotter/)
-* BladeBit: [master / cef433cac3ff8f469529486bb5f036ec879d88be](https://github.com/harold-b/bladebit/)
+* BladeBit: [master / 1fa5c6e5c0582f30e8edf93cf34d8d7921198fd1](https://github.com/harold-b/bladebit/)
 * PlotNG: [v0.62](https://github.com/maded2/plotng)
 * ChiaDog: [v0.7.0](https://github.com/martomi/chiadog/)
 

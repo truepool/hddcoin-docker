@@ -2,7 +2,7 @@ FROM ubuntu:latest AS mm_compiler
 ENV MM_BRANCH="master"
 ENV MM_CHECKOUT="a9a49031ac03504b272b7199ef3e071c2d93e9cc"
 ENV BB_BRANCH="master"
-ENV BB_CHECKOUT="cef433cac3ff8f469529486bb5f036ec879d88be"
+ENV BB_CHECKOUT="1fa5c6e5c0582f30e8edf93cf34d8d7921198fd1"
 
 WORKDIR /root
 
@@ -19,8 +19,8 @@ RUN echo "cloning BladeBit ${BB_BRANCH}"
 RUN git clone --branch ${BB_BRANCH} --recursive https://github.com/harold-b/bladebit.git \
 && cd bladebit \
 && git checkout ${BB_CHECKOUT} \
-&& ./build-bls \
-&& make clean && make -j$(nproc --all)
+&& mkdir -p build && cd build \
+&& cmake .. && cmake --build . --target bladebit --config Release
 
 
 FROM ubuntu:latest
@@ -92,7 +92,7 @@ COPY --from=mm_compiler /root/chia-plotter/build /usr/lib/chia-plotter
 RUN ln -s /usr/lib/chia-plotter/chia_plot /usr/bin/chia_plot
 
 # Copy bladebit
-COPY --from=mm_compiler /root/bladebit/.bin/release/bladebit /usr/bin/bladebit
+COPY --from=mm_compiler /root/bladebit/build/bladebit /usr/bin/bladebit
 
 # Setup custom bashrc
 COPY ./files/bashrc /root/.bashrc
