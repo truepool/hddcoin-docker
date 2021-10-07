@@ -1,24 +1,25 @@
 FROM ubuntu:latest AS mm_compiler
 ENV MM_BRANCH="master"
-ENV MM_CHECKOUT="a9a49031ac03504b272b7199ef3e071c2d93e9cc"
-ENV BB_BRANCH="master"
-ENV BB_CHECKOUT="1fa5c6e5c0582f30e8edf93cf34d8d7921198fd1"
+ENV MM_CHECKOUT="2ffe7a6e84370d1a54e558deb392bdca9dfd89cb"
+ENV BB_VERSION="v1.2.0"
 
 WORKDIR /root
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y gcc g++ cmake libsodium-dev git libnuma-dev libgmp-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y gcc g++ cmake libsodium-dev git libnuma-dev libgmp-dev wget
 
 RUN echo "cloning MadMax branch ${MM_BRANCH}"
-RUN git clone --branch ${MM_BRANCH} https://github.com/madMAx43v3r/chia-plotter.git \
-&& cd chia-plotter \
+RUN git clone --branch ${MM_BRANCH} https://github.com/Chia-Network/chia-plotter-madmax \
+&& cd chia-plotter-madmax \
 && git checkout ${MM_CHECKOUT} \
 && git submodule update --init \
 && /bin/sh ./make_devel.sh
 
-RUN echo "cloning BladeBit ${BB_BRANCH}"
-RUN git clone --branch ${BB_BRANCH} --recursive https://github.com/harold-b/bladebit.git \
+RUN echo "Building BladeBit ${BB_VERSION}"
+RUN wget https://github.com/Chia-Network/bladebit/archive/refs/tags/${BB_VERSION}.tar.gz \
+&& tar xf ${BB_VERSION}.tar.gz \
+&& rm ${BB_VERSION}.tar.gz \
+&& mv bladebit-* bladebit \
 && cd bladebit \
-&& git checkout ${BB_CHECKOUT} \
 && mkdir -p build && cd build \
 && cmake .. && cmake --build . --target bladebit --config Release
 
@@ -37,10 +38,10 @@ ENV farmer_port="null"
 ENV testnet="false"
 ENV full_node_port="null"
 ENV TZ="UTC"
-ENV CHIA_BRANCH="1.2.8"
+ENV CHIA_BRANCH="1.2.9"
 ENV CHIA_CHECKOUT="6bbc9c388860cdb9547e53de16149d78531bb9eb"
 ENV CHIADOG_VERSION="v0.7.0"
-ENV FARMR_VERSION="v1.7.6.10"
+ENV FARMR_VERSION="v1.7.6.11"
 ENV PLOTMAN_VERSION="v0.5.1"
 ENV PLOTNG_VERSION="v0.26"
 
@@ -88,7 +89,7 @@ WORKDIR /chia-blockchain
 ADD ./entrypoint.sh entrypoint.sh
 
 # Copy madmax
-COPY --from=mm_compiler /root/chia-plotter/build /usr/lib/chia-plotter
+COPY --from=mm_compiler /root/chia-plotter-madmax/build /usr/lib/chia-plotter
 RUN ln -s /usr/lib/chia-plotter/chia_plot /usr/bin/chia_plot
 
 # Copy bladebit
