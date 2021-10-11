@@ -39,7 +39,6 @@ ENV testnet="false"
 ENV full_node_port="null"
 ENV TZ="UTC"
 ENV CHIA_BRANCH="1.2.9"
-ENV CHIA_CHECKOUT="66c2399ad5cedafed8fa8af7b61d1eda8082859a"
 ENV CHIADOG_VERSION="v0.7.0"
 ENV FARMR_VERSION="v1.7.6.11"
 ENV PLOTMAN_VERSION="v0.5.1"
@@ -54,7 +53,6 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 RUN echo "cloning ${CHIA_BRANCH}"
 RUN git clone --branch ${CHIA_BRANCH} https://github.com/Chia-Network/chia-blockchain.git \
 && cd chia-blockchain \
-&& git checkout ${CHIA_CHECKOUT} \
 && git submodule update --init mozilla-ca \
 && chmod +x install.sh \
 && /usr/bin/sh ./install.sh
