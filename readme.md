@@ -1,4 +1,4 @@
-# Official [TruePool.io](https://www.truepool.io) & [TrueNAS](https://www.truenas.com) Chia Docker Container
+# Official [TruePool.io](https://www.truepool.io) & [TrueNAS](https://www.truenas.com) HDDcoin Docker Container
 
 <p align="center">
  <a href="https://discord.com/invite/hWwAfGFyBz"><img alt="Chat Now" src="https://badgen.net/discord/members/Q3St5fPETd/?icon=discord&label=Join%20the%20TruePool%20Community" /></a>
@@ -8,12 +8,12 @@
 
 * [TruePool.io - Website & Leaderboards](https://www.truepool.io)
 * [Official Container Image Documentation](https://www.truepool.io/kb/truepool-docker-image/)
-* [ixsystems/chia-docker - Docker Hub](https://hub.docker.com/repository/docker/ixsystems/chia-docker)
+* [ixsystems/hddcoin-docker - Docker Hub](https://hub.docker.com/repository/docker/ixsystems/hddcoin-docker)
 
 
 Current Versions:
 
-* Chia: [1.2.11](https://github.com/Chia-Network/chia-blockchain/)
+* HDDcoin: [1.2.9](https://github.com/HDDcoin-Network/hddcoin-blockchain/)
 * Plotman: [v0.5.1](https://github.com/ericaltendorf/plotman/)
 * Farmr: [1.7.6.12](https://github.com/joaquimguimaraes/farmr/)
 * MadMax: [master / 2ffe7a6e84370d1a54e558deb392bdca9dfd89cb](https://github.com/Chia-Network/chia-plotter-madmax/)
@@ -23,14 +23,14 @@ Current Versions:
 
 ## Basic Startup
 ```
-docker run --name <container-name> -d ixsystems/chia-docker:latest
+docker run --name <container-name> -d ixsystems/hddcoin-docker:latest
 (optional -v /path/to/data:/data)
 (optional -v /path/to/plots:/plots)
 ```
 
-## Chia Binary
+## HDDcoin Binary
 ```
-# chia
+# hddcoin 
 ```
 
 ## Plotman
@@ -61,9 +61,9 @@ Timezones can be configured using the `TZ` env variable. A list of supported tim
 ```
 ## Configuration
 
-You can modify the behavior of your Chia container by setting specific environment variables.
+You can modify the behavior of your HDDcoin container by setting specific environment variables.
 
-To ensure that your chia config settings and sycned blockchain persist, you can pass in a directory for /data
+To ensure that your hddcoin config settings and sycned blockchain persist, you can pass in a directory for /data
 ```
 -v /path/to/data:/data
 ```
@@ -74,7 +74,7 @@ To use your own keys, place your secret mnemonic into a file and pass as argumen
 ```
 or pass keys into the running container
 ```
-docker exec -it <container-name> venv/bin/chia keys add
+docker exec -it <container-name> venv/bin/hddcoin keys add
 ```
 
 To start a farmer only node pass
@@ -111,22 +111,22 @@ NOTE: You should make sure plotman is configured properly first
 
 The `plots_dir` environment variable can be used to specify the directory containing the plots, it supports PATH-style colon-separated directories.
 
-#### or run commands externally with venv (this works for most chia XYZ commands)
+#### or run commands externally with venv (this works for most hddcoin XYZ commands)
 ```
-docker exec -it chia venv/bin/chia plots add -d /plots
+docker exec -it hddcoin venv/bin/hddcoin plots add -d /plots
 ```
 
 #### status from outside the container
 ```
-docker exec -it chia venv/bin/chia show -s -c
+docker exec -it hddcoin venv/bin/hddcoin show -s -c
 ```
 
 #### Connect to testnet?
 ```
-docker run -d --expose=58444 --expose=8555 -e testnet=true --name <container-name> ixsystems/chia-docker:latest
+docker run -d --expose=58444 --expose=8555 -e testnet=true --name <container-name> ixsystems/hddcoin-docker:latest
 ```
 
 #### Need a wallet?
 ```
-docker exec -it chia-farmer1 venv/bin/chia wallet show (follow the prompts)
+docker exec -it hddcoin-farmer1 venv/bin/hddcoin wallet show (follow the prompts)
 ```

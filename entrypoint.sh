@@ -9,11 +9,11 @@ if [ ! -d "/data" ] ; then
 	mkdir /data
 fi
 
-# Setup Chia main state directory
-if [ ! -d "/data/chia" ] ; then
-	mkdir -p /data/chia
+# Setup hddcoin main state directory
+if [ ! -d "/data/hddcoin" ] ; then
+	mkdir -p /data/hddcoin
 fi
-ln -fs /data/chia /root/.chia
+ln -fs /data/hddcoin /root/.hddcoin
 
 # Setup Farmr Files
 if [ ! -d "/data/farmr/config" ] ; then
@@ -30,7 +30,7 @@ ln -fs /data/farmr/cache /farmr/cache
 ln -fs /data/farmr/id.json /farmr/id.json
 
 # Set location of XCH binary
-echo "/chia-blockchain/venv/bin/chia" > /farmr/override-xch-binary.txt
+echo "/hddcoin-blockchain/venv/bin/hddcoin" > /farmr/override-xch-binary.txt
 
 # Setup plotman persistence
 if [ ! -d "/data/plotman" ] ; then
@@ -49,20 +49,20 @@ if [ ! -e "/data/chiadog/config.yaml" ] ; then
 	cp /chiadog/config-example.yaml /data/chiadog/config.yaml
 fi
 
-cd /chia-blockchain
+cd /hddcoin-blockchain
 
 . ./activate
 
-chia init
+hddcoin init
 
 # Enable INFO log level by default
-chia configure -log-level INFO
+hddcoin configure -log-level INFO
 
 if [[ ${keys} == "generate" ]]; then
   echo "to use your own keys pass them as a text file -v /path/to/keyfile:/path/in/container and -e keys=\"/path/in/container\""
-  chia keys generate
+  hddcoin keys generate
 else
-  chia keys add -f ${keys}
+  hddcoin keys add -f ${keys}
 fi
 
 # Check if a CA cert is provided for harvester
@@ -71,7 +71,7 @@ if [[ -n "${ca}" ]]; then
     echo "A path to a copy of the farmer peer's ssl/ca required."
     exit
   fi
-  chia init -c ${ca}
+  hddcoin init -c ${ca}
 fi
 
 for p in ${plots_dir//:/ }; do
@@ -79,30 +79,30 @@ for p in ${plots_dir//:/ }; do
     if [[ ! "$(ls -A $p)" ]]; then
         echo "Plots directory '${p}' appears to be empty, try mounting a plot directory with the docker -v command"
     fi
-    chia plots add -d ${p}
+    hddcoin plots add -d ${p}
 done
 
-sed -i 's/localhost/127.0.0.1/g' ~/.chia/mainnet/config/config.yaml
+sed -i 's/localhost/127.0.0.1/g' ~/.hddcoin/mainnet/config/config.yaml
 
 if [[ ${farmer} == 'true' ]]; then
-  chia start farmer-only
+  hddcoin start farmer-only
 elif [[ ${harvester} == 'true' ]]; then
   if [[ -z ${farmer_address} || -z ${farmer_port} || -z ${ca} ]]; then
     echo "A farmer peer address, port, and ca path are required."
     exit
   else
-    chia configure --set-farmer-peer ${farmer_address}:${farmer_port}
-    chia start harvester
+    hddcoin configure --set-farmer-peer ${farmer_address}:${farmer_port}
+    hddcoin start harvester
   fi
 else
-  chia start farmer
+  hddcoin start farmer
 fi
 
 if [[ ${testnet} == "true" ]]; then
   if [[ -z $full_node_port || $full_node_port == "null" ]]; then
-    chia configure --set-fullnode-port 58444
+    hddcoin configure --set-fullnode-port 58444
   else
-    chia configure --set-fullnode-port ${var.full_node_port}
+    hddcoin configure --set-fullnode-port ${var.full_node_port}
   fi
 fi
 

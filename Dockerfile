@@ -26,8 +26,8 @@ RUN wget https://github.com/Chia-Network/bladebit/archive/refs/tags/${BB_VERSION
 
 FROM ubuntu:latest
 
-EXPOSE 8555
-EXPOSE 8444
+EXPOSE 28555
+EXPOSE 28444
 
 ENV keys="generate"
 ENV harvester="false"
@@ -38,21 +38,21 @@ ENV farmer_port="null"
 ENV testnet="false"
 ENV full_node_port="null"
 ENV TZ="UTC"
-ENV CHIA_BRANCH="1.2.11"
+ENV HDDCOIN_BRANCH="1.2.9"
 ENV CHIADOG_VERSION="v0.7.0"
 ENV FARMR_VERSION="v1.7.6.12"
 ENV PLOTMAN_VERSION="v0.5.1"
 ENV PLOTNG_VERSION="v0.26"
 
-# Chia
+# HDD 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y curl jq python3 ansible tar bash ca-certificates git openssl unzip wget python3-pip sudo acl build-essential python3-dev python3.8-venv python3.8-distutils apt nfs-common python-is-python3 vim tzdata libsodium-dev libnuma-dev rsync tmux mc sqlite3 libgmp-dev
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-RUN echo "cloning ${CHIA_BRANCH}"
-RUN git clone --branch ${CHIA_BRANCH} https://github.com/Chia-Network/chia-blockchain.git \
-&& cd chia-blockchain \
+RUN echo "cloning ${HDDCOIN_BRANCH}"
+RUN git clone --branch ${HDDCOIN_BRANCH} https://github.com/HDDcoin-Network/hddcoin-blockchain.git \
+&& cd hddcoin-blockchain \
 && git submodule update --init mozilla-ca \
 && chmod +x install.sh \
 && /usr/bin/sh ./install.sh
@@ -81,9 +81,9 @@ RUN wget https://github.com/martomi/chiadog/archive/refs/tags/${CHIADOG_VERSION}
 && mv chiadog-*/ /chiadog \
 && cd /chiadog && ./install.sh
 
-# Setup Chia
-ENV PATH=/chia-blockchain/venv/bin/:$PATH
-WORKDIR /chia-blockchain
+# Setup HDDcoin 
+ENV PATH=/hddcoin-blockchain/venv/bin/:$PATH
+WORKDIR /hddcoin-blockchain
 ADD ./entrypoint.sh entrypoint.sh
 
 # Copy madmax
