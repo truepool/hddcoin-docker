@@ -1,7 +1,7 @@
 FROM ubuntu:latest AS mm_compiler
 ENV MM_BRANCH="master"
 ENV MM_CHECKOUT="2ffe7a6e84370d1a54e558deb392bdca9dfd89cb"
-ENV BB_VERSION="v1.2.0"
+ENV BB_VERSION="v1.2.4"
 
 WORKDIR /root
 
@@ -38,9 +38,9 @@ ENV farmer_port="null"
 ENV testnet="false"
 ENV full_node_port="null"
 ENV TZ="UTC"
-ENV HDDCOIN_BRANCH="1.2.9"
+ENV HDDCOIN_BRANCH="2.0.0"
 ENV CHIADOG_VERSION="v0.7.0"
-ENV FARMR_VERSION="v1.7.6.12"
+ENV FARMR_VERSION="v1.7.7.4"
 ENV PLOTMAN_VERSION="v0.5.1"
 ENV PLOTNG_VERSION="v0.26"
 

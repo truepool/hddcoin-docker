@@ -13,11 +13,11 @@
 
 Current Versions:
 
-* HDDcoin: [1.2.9](https://github.com/HDDcoin-Network/hddcoin-blockchain/)
+* HDDcoin: [2.0.0](https://github.com/HDDcoin-Network/hddcoin-blockchain/)
 * Plotman: [v0.5.1](https://github.com/ericaltendorf/plotman/)
-* Farmr: [1.7.6.12](https://github.com/joaquimguimaraes/farmr/)
+* Farmr: [1.7.7.4](https://github.com/joaquimguimaraes/farmr/)
 * MadMax: [master / 2ffe7a6e84370d1a54e558deb392bdca9dfd89cb](https://github.com/Chia-Network/chia-plotter-madmax/)
-* BladeBit: [v1.2.0](https://github.com/Chia-Network/bladebit/)
+* BladeBit: [v1.2.4](https://github.com/Chia-Network/bladebit/)
 * PlotNG: [v0.62](https://github.com/maded2/plotng)
 * ChiaDog: [v0.7.0](https://github.com/martomi/chiadog/)
 
