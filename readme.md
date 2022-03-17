@@ -1,19 +1,9 @@
-# Official [TruePool.io](https://www.truepool.io) & [TrueNAS](https://www.truenas.com) HDDcoin Docker Container
-
-<p align="center">
- <a href="https://discord.com/invite/hWwAfGFyBz"><img alt="Chat Now" src="https://badgen.net/discord/members/Q3St5fPETd/?icon=discord&label=Join%20the%20TruePool%20Community" /></a>
-</p>
-
-## Important Links
-
-* [TruePool.io - Website & Leaderboards](https://www.truepool.io)
-* [Official Container Image Documentation](https://www.truepool.io/kb/truepool-docker-image/)
-* [ixsystems/hddcoin-docker - Docker Hub](https://hub.docker.com/repository/docker/ixsystems/hddcoin-docker)
+# [TrueNAS](https://www.truenas.com) HDDcoin Docker Container
 
 
 Current Versions:
 
-* HDDcoin: [2.0.0](https://github.com/HDDcoin-Network/hddcoin-blockchain/)
+* HDDcoin: [2.0.2](https://github.com/HDDcoin-Network/hddcoin-blockchain/)
 * Plotman: [v0.5.1](https://github.com/ericaltendorf/plotman/)
 * Farmr: [1.7.7.4](https://github.com/joaquimguimaraes/farmr/)
 * MadMax: [master / 2ffe7a6e84370d1a54e558deb392bdca9dfd89cb](https://github.com/Chia-Network/chia-plotter-madmax/)
